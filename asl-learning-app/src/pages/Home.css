@@ -1,0 +1,11 @@
+.wave {
+    padding-right: 30px;
+    font-size: 80px;
+}
+
+.home-header {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+}

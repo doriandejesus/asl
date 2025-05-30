@@ -1,5 +1,7 @@
 import React from 'react';
 import './Header.css';
+import { RxHamburgerMenu } from "react-icons/rx";
+
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = React.useState(false);
@@ -15,24 +17,12 @@ const Header = () => {
                 </p>
             </div>
 
-            <button
-                className='hamburger'
-                aria-label='Toggle navigation menu'
-                onClick={() => setMenuOpen(!menuOpen)}
-            >
-                <span className='bar'></span>
-                <span className='bar'></span>
-                <span className='bar'></span>
-            </button>
+            <RxHamburgerMenu 
+                className='menu-icon' 
+                onClick={() => setMenuOpen(!menuOpen)} 
+                size={30}
+            />
 
-            <div className={`nav${menuOpen ? ' open' : ''}`}>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/lessons">Lessons</a></li>
-                    <li><a href="/resources">Resources</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
         </div>
     );
 };
