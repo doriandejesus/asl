@@ -8,7 +8,13 @@ const Header = () => {
 
     return (
         <div className='header'>
-            <div className='logo'> 
+            <div 
+            className='logo'
+            onClick={() => {
+                window.location.href = '/';
+                document.body.style.cursor = 'pointer';
+                setMenuOpen(false);
+            }}>
                 <h1 className='large'>ASL</h1>
                 <p className='small'>
                     American<br/>

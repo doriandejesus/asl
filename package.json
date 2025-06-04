@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
     "embla-carousel-react": "^8.6.0",
     "emojis-list": "^3.0.0",
     "icons": "^1.0.0",
