@@ -1,41 +1,51 @@
 import React from 'react';
 import Header from '../components/Header';
 import './Fingerspelling.css'; // Assuming you have a CSS file for styling
+import Slider from '@mui/material/Slider';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
+import { LuTurtle } from "react-icons/lu";
+import { LuRabbit } from "react-icons/lu";
+
+
 
 const Fingerspelling = () => {
     const [randomWord, setRandomWord] = React.useState('');
     const [wordLength, setWordLength] = React.useState(5);
+    const [letterSpeed, setLetterSpeed] = React.useState(800); // Default speed
+    const [score, setScore] = React.useState(0);
+    const [inputValue, setInputValue] = React.useState('');
+    const [highestStreak, setHighestStreak] = React.useState(0);
+    const [currentStreak, setCurrentStreak] = React.useState(0);
 
     const [currentLetterIndex, setCurrentLetterIndex] = React.useState(0);
 
     const letterImages = {
-        a: "./components/letters/pngegg (1).png",
-        b: "./components/letters/pngegg (2).png",
-        c: "./components/letters/pngegg (3).png",
-        d: "./components/letters/pngegg (4).png",
-        e: "./components/letters/pngegg (5).png",
-        f: "./components/letters/pngegg (6).png",
-        g: "./components/letters/pngegg (7).png",
-        h: "./components/letters/pngegg (8).png",
-        i: "./components/letters/pngegg (9).png",
-        j: "./components/letters/pngegg (10).png",
-        k: "./components/letters/pngegg (11).png",
-        l: "./components/letters/pngegg (12).png",
-        m: "./components/letters/pngegg (13).png",
-        n: "./components/letters/pngegg (14).png",
-        o: "./components/letters/pngegg (15).png",
-        p: "./components/letters/pngegg (16).png",
-        q: "./components/letters/pngegg (17).png",
-        r: "./components/letters/pngegg (18).png",
-        s: "./components/letters/pngegg (19).png",
-        t: "./components/letters/pngegg (20).png",
-        u: "./components/letters/pngegg (21).png",
-        v: "./components/letters/pngegg (22).png",
-        w: "./components/letters/pngegg (23).png",
-        x: "./components/letters/pngegg (24).png",
-        y: "./components/letters/pngegg (25).png",
-        z: "./components/letters/pngegg (26).png"
+        a: "/src/components/letters/pngegg (1).png",
+        b: "/src/components/letters/pngegg (2).png",
+        c: "/src/components/letters/pngegg (3).png",
+        d: "/src/components/letters/pngegg (4).png",
+        e: "/src/components/letters/pngegg (5).png",
+        f: "/src/components/letters/pngegg (6).png",
+        g: "/src/components/letters/pngegg (7).png",
+        h: "/src/components/letters/pngegg (8).png",
+        i: "/src/components/letters/pngegg (9).png",
+        j: "/src/components/letters/pngegg (10).png",
+        k: "/src/components/letters/pngegg (11).png",
+        l: "/src/components/letters/pngegg (12).png",
+        m: "/src/components/letters/pngegg (13).png",
+        n: "/src/components/letters/pngegg (14).png",
+        o: "/src/components/letters/pngegg (15).png",
+        p: "/src/components/letters/pngegg (16).png",
+        q: "/src/components/letters/pngegg (17).png",
+        r: "/src/components/letters/pngegg (18).png",
+        s: "/src/components/letters/pngegg (19).png",
+        t: "/src/components/letters/pngegg (20).png",
+        u: "/src/components/letters/pngegg (21).png",
+        v: "/src/components/letters/pngegg (22).png",
+        w: "/src/components/letters/pngegg (23).png",
+        x: "/src/components/letters/pngegg (24).png",
+        y: "/src/components/letters/pngegg (25).png",
+        z: "/src/components/letters/pngegg (26).png"
     };
 
     const getNewWord = async (length) => {
@@ -51,6 +61,20 @@ const Fingerspelling = () => {
         console.log(randomWord);
     };
 
+    const compare = (input, word) => {
+        if (input === word) {
+            setScore(score + 1);
+            setCurrentStreak(currentStreak + 1);
+            if (currentStreak + 1 > highestStreak) {
+                setHighestStreak(currentStreak + 1);
+            }
+        } else {
+            setCurrentStreak(0);
+        }
+        setInputValue(''); // Clear input after comparison
+        getNewWord(wordLength); // Fetch a new word after comparison
+    };
+
     React.useEffect(() => {
         if (!randomWord) return;
         setCurrentLetterIndex(0);
@@ -64,7 +88,7 @@ const Fingerspelling = () => {
                     return prev; // Stop at the last letter
                 }
             });
-        }, 1000); //change image every 1000 ms (1 second)
+        }, (1600 - letterSpeed)); //change image every 1000 ms (1 second)
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, [randomWord]);
@@ -104,8 +128,23 @@ const Fingerspelling = () => {
                                 <h2>Settings</h2>
                                 <div className='option-indivs'>
                                     <h3>Letter Speed:</h3>
+                                    <Slider
+                                        aria-label="Letter Speed"
+                                        value={letterSpeed}
+                                        onChange={(e, value) => setLetterSpeed(value)}
+                                        color='white'
+                                        step={300}
+                                        marks
+                                        min={200}
+                                        max={1400}
+                                    />
+                                    <div className='speed-icons'>
+                                        <LuTurtle />
+                                        <LuRabbit />
+                                    </div>
                                     <h3>Word Size:</h3>
                                     <select
+                                        value={wordLength}
                                         onChange={(e) => {
                                             const value = e.target.value;
                                             if (value === "random") {
@@ -133,8 +172,8 @@ const Fingerspelling = () => {
                             <div className='score'>
                                 <h2 className='score-title'>Score</h2>
                                 <div className='score-indivs'>
-                                    <h3>Total Correct: 15</h3>
-                                    <h3>Highest Streak: 6</h3>
+                                    <h3>Total Correct: {score}</h3>
+                                    <h3>Highest Streak: {highestStreak}</h3>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +185,7 @@ const Fingerspelling = () => {
                             className="answer-input"
                             placeholder="Type your answer..."
                             autoComplete="off"
+                            onSuspend={(e, value) => {setInputValue(e.target.value.toLowerCase()); compare(inputValue, randomWord);}}                            
                         />
                         <div className='buttons'>
                             <button className='submit-button'>Submit</button>
