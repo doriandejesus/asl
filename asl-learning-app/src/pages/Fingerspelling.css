@@ -1,7 +1,7 @@
 .main-modal {
     width: 50%;
     height: auto;
-    background-color: orange;
+    background-color: #e48213;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -9,6 +9,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .main-modal-header {
@@ -55,6 +56,7 @@
     height: 90%;
     margin: auto;
     object-fit: contain;
+    transform: translateX(20px);
 }
 
 .settings {
@@ -165,4 +167,13 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.replay-icon {
+    font-size: 2.2rem !important;
+    display: absolute;
+    color: black;
+    opacity: 0.6;
+    cursor: pointer;
+    transform: translateY(180px);
 }

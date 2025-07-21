@@ -3,13 +3,15 @@ import Header from '../components/Header';
 import './Fingerspelling.css'; // Assuming you have a CSS file for styling
 import Slider from '@mui/material/Slider';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { LuTurtle } from "react-icons/lu";
 import { LuRabbit } from "react-icons/lu";
+import embersGif from '../assets/embers.mp4'; // Adjust the path if needed
 
 
 
 const Fingerspelling = () => {
-    const [randomWord, setRandomWord] = React.useState('');
+    const [randomWord, setRandomWord] = React.useState(''); 
     const [wordLength, setWordLength] = React.useState(5);
     const [letterSpeed, setLetterSpeed] = React.useState(800); // Default speed
     const [score, setScore] = React.useState(0);
@@ -68,17 +70,19 @@ const Fingerspelling = () => {
             if (currentStreak + 1 > highestStreak) {
                 setHighestStreak(currentStreak + 1);
             }
+            
+            document.getElementById('answer-input').value = ''; //if correct, clear input
+            getNewWord(wordLength); // Fetch a new word after correct
         } else {
             setCurrentStreak(0);
+             
         }
         setInputValue(''); // Clear input after comparison
-        getNewWord(wordLength); // Fetch a new word after comparison
+        
     };
 
-    React.useEffect(() => {
-        if (!randomWord) return;
+    const playWord = () => {
         setCurrentLetterIndex(0);
-
         const interval = setInterval(() => {
             setCurrentLetterIndex((prev) => {
                 if (prev < randomWord.length - 1) {
@@ -89,8 +93,11 @@ const Fingerspelling = () => {
                 }
             });
         }, (1600 - letterSpeed)); //change image every 1000 ms (1 second)
+    };  
 
-        return () => clearInterval(interval); // Cleanup on unmount
+    React.useEffect(() => {
+        if (!randomWord) getNewWord(wordLength); // Fetch a new word if not already set
+        playWord(); // Start playing the word when it changes (since thats when useEffect runs)
     }, [randomWord]);
 
     return (
@@ -120,7 +127,13 @@ const Fingerspelling = () => {
                             ) : (
                                 <p className='loading-text'>Loading...</p>
                             )}
-                            
+                            <ReplayIcon 
+                            className='replay-icon'
+                            onClick={() => {
+                                playWord();
+                                document.body.style.cursor = 'pointer';
+                            }}
+                        />
                         </div>
 
                         <div className='settings'>
@@ -185,13 +198,25 @@ const Fingerspelling = () => {
                             className="answer-input"
                             placeholder="Type your answer..."
                             autoComplete="off"
-                            onSuspend={(e, value) => {setInputValue(e.target.value.toLowerCase()); compare(inputValue, randomWord);}}                            
+                            id='answer-input'
+                            onChange={(e, value) => {setInputValue(e.target.value.toLowerCase());}}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    compare(inputValue, randomWord);
+                                }}
+                            }                                          
                         />
                         <div className='buttons'>
-                            <button className='submit-button'>Submit</button>
+                            <button 
+                                className='submit-button'
+                                onClick= {() => compare(inputValue, randomWord)}>
+                                    Submit
+                            </button>
                             <button 
                                 className='skip-button'
-                                onClick={() => {getNewWord(wordLength);}}>Skip</button>
+                                onClick={() => {getNewWord(wordLength);
+                                    document.getElementById('answer-input').value = '';
+                                }}>Skip</button>
                         </div>
                     </div>
                 </div>
@@ -201,3 +226,15 @@ const Fingerspelling = () => {
 };
 
 export default Fingerspelling;
+
+/* Add this at the end of the file to include the embers gif as a background */
+
+const style = document.createElement('style');
+style.innerHTML = `
+    body {
+        background: url(${embersGif}) center center fixed;
+        background-size: cover;
+        z-index: -1;
+    }
+`;
+document.head.appendChild(style);
