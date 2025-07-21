@@ -6,9 +6,6 @@ import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { LuTurtle } from "react-icons/lu";
 import { LuRabbit } from "react-icons/lu";
-import embersGif from '../assets/embers.mp4'; // Adjust the path if needed
-
-
 
 const Fingerspelling = () => {
     const [randomWord, setRandomWord] = React.useState(''); 
@@ -96,12 +93,25 @@ const Fingerspelling = () => {
     };  
 
     React.useEffect(() => {
-        if (!randomWord) getNewWord(wordLength); // Fetch a new word if not already set
-        playWord(); // Start playing the word when it changes (since thats when useEffect runs)
+        if (randomWord) playWord(); // Start playing the word when it changes (since thats when useEffect runs)
     }, [randomWord]);
+
+    React.useEffect(() => { //when first load page
+        getNewWord(wordLength); 
+    }, []);
 
     return (
         <>
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="background-video"
+                >
+                <source src="/videos/embers.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
             <Header />
             <main>
                 <div className='main-modal'>
@@ -226,15 +236,3 @@ const Fingerspelling = () => {
 };
 
 export default Fingerspelling;
-
-/* Add this at the end of the file to include the embers gif as a background */
-
-const style = document.createElement('style');
-style.innerHTML = `
-    body {
-        background: url(${embersGif}) center center fixed;
-        background-size: cover;
-        z-index: -1;
-    }
-`;
-document.head.appendChild(style);
