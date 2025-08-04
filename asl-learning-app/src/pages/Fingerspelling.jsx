@@ -153,14 +153,14 @@ const Fingerspelling = () => {
                             {randomWord ? (
                                 <img 
                                     src={letterImages[randomWord[currentLetterIndex]]}
-                                    alt={`Letter ${randomWord[currentLetterIndex].toUpperCase()}`}
+                                    alt={`Letter ${randomWord[currentLetterIndex]}`}
                                     className='letter-image'
                                 />
                             ) : (
                                 <p className='loading-text'>Loading...</p>
                             )}
                             <h2
-                            className={`practice-text ${practiceMode ? 'on' : ''}`}>{randomWord[currentLetterIndex].toUpperCase()}</h2>
+                            className={`practice-text ${practiceMode ? 'on' : ''}`}>{randomWord[currentLetterIndex] ? randomWord[currentLetterIndex].toUpperCase() : ''}</h2>
                             <div
                             className='replay-container'
                             title='(CTRL + R)'
