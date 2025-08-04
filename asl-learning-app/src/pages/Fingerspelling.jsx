@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import './Fingerspelling.css'; // Assuming you have a CSS file for styling
 import Slider from '@mui/material/Slider';
+import Switch from '@mui/material/Switch';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { LuTurtle } from "react-icons/lu";
@@ -15,7 +16,9 @@ const Fingerspelling = () => {
     const [inputValue, setInputValue] = React.useState('');
     const [highestStreak, setHighestStreak] = React.useState(0);
     const [currentStreak, setCurrentStreak] = React.useState(0);
-
+    const [isCorrect, setIsCorrect] = React.useState(false);
+    const [isIncorrect, setIsIncorrect] = React.useState(false);
+    const [practiceMode, setPracticeMode] = React.useState(false);
     const [currentLetterIndex, setCurrentLetterIndex] = React.useState(0);
 
     const letterImages = {
@@ -67,10 +70,15 @@ const Fingerspelling = () => {
             if (currentStreak + 1 > highestStreak) {
                 setHighestStreak(currentStreak + 1);
             }
+
+            setIsCorrect(true);
+            setTimeout(() => setIsCorrect(false), 500);
             
             document.getElementById('answer-input').value = ''; //if correct, clear input
             getNewWord(wordLength); // Fetch a new word after correct
         } else {
+            setIsIncorrect(true);
+            setTimeout(() => setIsIncorrect(false), 500);
             setCurrentStreak(0);
              
         }
@@ -100,17 +108,31 @@ const Fingerspelling = () => {
         getNewWord(wordLength); 
     }, []);
 
+    React.useEffect(() => { 
+        const handleKeyDown = (e) => {
+            if (e.ctrlKey && e.key === 'r') {
+                e.preventDefault();
+                setCurrentLetterIndex(0); // Reset to the first letter
+                playWord(); // Play the word when Ctrl + R is pressed
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    })
+
     return (
         <>
             <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="background-video"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className={`background-video ${currentStreak > 0 ? 'visible' : ''}`}
                 >
-                <source src="/videos/embers.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
+                    <source src="/videos/embers.mp4" type="video/mp4" />
+                    Your browser does not support the video tag. 
             </video>
             <Header />
             <main>
@@ -137,20 +159,28 @@ const Fingerspelling = () => {
                             ) : (
                                 <p className='loading-text'>Loading...</p>
                             )}
-                            <ReplayIcon 
-                            className='replay-icon'
+                            <h2
+                            className={`practice-text ${practiceMode ? 'on' : ''}`}>{randomWord[currentLetterIndex].toUpperCase()}</h2>
+                            <div
+                            className='replay-container'
+                            title='(CTRL + R)'
                             onClick={() => {
                                 playWord();
                                 document.body.style.cursor = 'pointer';
                             }}
-                        />
+                            >   
+                                <ReplayIcon
+                                className='replay-icon'
+                                />
+                                <span className='replay-text'>Replay</span>
+                            </div>
                         </div>
 
                         <div className='settings'>
                             <div className='options'>
                                 <h2>Settings</h2>
                                 <div className='option-indivs'>
-                                    <h3>Letter Speed:</h3>
+                                    <h3>Letter Speed</h3>
                                     <Slider
                                         aria-label="Letter Speed"
                                         value={letterSpeed}
@@ -165,38 +195,56 @@ const Fingerspelling = () => {
                                         <LuTurtle />
                                         <LuRabbit />
                                     </div>
-                                    <h3>Word Size:</h3>
-                                    <select
-                                        value={wordLength}
-                                        onChange={(e) => {
-                                            const value = e.target.value;
-                                            if (value === "random") {
-                                                setWordLength(Math.floor(Math.random() * 5) + 3); // random 3-7
-                                            } else if (value === "more") {
-                                                setWordLength(7);
-                                            } else {
-                                                setWordLength(parseInt(value, 10));
-                                            }
-                                        }}
-                                        className='word-size'
-                                    >
-                                        <option value="random">Random</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-
-                                    </select>
+                                    <div className='size-container'>
+                                        <h3>Word Size</h3>
+                                        <select
+                                            value={wordLength}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (value === "random") {
+                                                    setWordLength(Math.floor(Math.random() * 5) + 3); // random 3-7
+                                                } else if (value === "more") {
+                                                    setWordLength(7);
+                                                } else {
+                                                    setWordLength(parseInt(value, 10));
+                                                }
+                                            }}
+                                            className='word-size'
+                                        >
+                                            <option value="random">Random</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                    <div className='practice-container'>
+                                        <h3>Practice Mode</h3>
+                                        <Switch
+                                            checked={practiceMode}
+                                            onChange={(e) => {
+                                                setPracticeMode(e.target.checked);
+                                            }}
+                                            color="primary"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className='score'>
                                 <h2 className='score-title'>Score</h2>
                                 <div className='score-indivs'>
-                                    <h3>Total Correct: {score}</h3>
-                                    <h3>Highest Streak: {highestStreak}</h3>
+                                    <div className='score-text-1'>
+                                        <h3> Total Correct: </h3>
+                                        <h3 className={`score-text ${isCorrect ? 'correct' : ''}`}>{score}</h3>
+                                    </div>
+                                    <div className='streak-text-1'>
+                                        <h3>Current Streak: </h3>
+                                        <h3 className={`streak-text ${isIncorrect ? 'incorrect' : isCorrect ? 'correct' : ''}`}>{currentStreak}</h3>
+                                        <h3 className={`streak-fire ${(currentStreak > 0) ? 'streak' : ''}`}>🔥</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +253,7 @@ const Fingerspelling = () => {
                     <div className='bottom-content'>
                         <input
                             type="text"
-                            className="answer-input"
+                            className={`answer-input ${isCorrect ? 'correct' : isIncorrect ? 'incorrect' : ''}`}
                             placeholder="Type your answer..."
                             autoComplete="off"
                             id='answer-input'
