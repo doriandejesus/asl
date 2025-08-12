@@ -374,7 +374,8 @@ body {
 }
 
 .streak-fire {
-    font-size: 20px;
+    font-size: 16px;
+    color: rgba(236, 15, 15, 0.856);
     opacity: 0;
     transition: opacity 0.3s ease;
 }

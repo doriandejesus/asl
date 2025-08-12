@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import './Fingerspelling.css'; // Assuming you have a CSS file for styling
 import Slider from '@mui/material/Slider';
 import Switch from '@mui/material/Switch';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
+import { ImFire } from "react-icons/im";
 import { LuTurtle } from "react-icons/lu";
 import { LuRabbit } from "react-icons/lu";
 
@@ -142,7 +144,7 @@ const Fingerspelling = () => {
                         <LocalLibraryOutlinedIcon 
                             className='dictionary-icon'
                             onClick={() => {
-                                window.location.href = '/library';
+                                window.location.href = '/dictionary';
                                 document.body.style.cursor = 'pointer';
                             }}
                         />
@@ -153,7 +155,7 @@ const Fingerspelling = () => {
                             {randomWord ? (
                                 <img 
                                     src={letterImages[randomWord[currentLetterIndex]]}
-                                    alt={`Letter ${randomWord[currentLetterIndex]}`}
+                                    alt={`Letter ${randomWord[currentLetterIndex] }`}
                                     className='letter-image'
                                 />
                             ) : (
@@ -222,7 +224,7 @@ const Fingerspelling = () => {
                                         </select>
                                     </div>
                                     <div className='practice-container'>
-                                        <h3>Practice Mode</h3>
+                                        <h3>Assist Mode</h3>
                                         <Switch
                                             checked={practiceMode}
                                             onChange={(e) => {
@@ -243,7 +245,7 @@ const Fingerspelling = () => {
                                     <div className='streak-text-1'>
                                         <h3>Current Streak: </h3>
                                         <h3 className={`streak-text ${isIncorrect ? 'incorrect' : isCorrect ? 'correct' : ''}`}>{currentStreak}</h3>
-                                        <h3 className={`streak-fire ${(currentStreak > 0) ? 'streak' : ''}`}>🔥</h3>
+                                        <h3 className={`streak-fire ${(currentStreak > 0) ? 'streak' : ''}`}><ImFire /></h3>
                                     </div>
                                 </div>
                             </div>
@@ -278,6 +280,7 @@ const Fingerspelling = () => {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </main>
         </>
     );

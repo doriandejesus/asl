@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import Fingerspelling from './pages/Fingerspelling'
+import Dictionary from './pages/Dictionary'
 import './App.css'
 
 function App() {
@@ -8,8 +9,9 @@ function App() {
     <div>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Fingerspelling />} /> {/* for now home is Fingerspelling */}
           <Route path="/fingerspelling" element={<Fingerspelling />} />
+          <Route path="/dictionary" element={<Dictionary />} />
         </Routes>
       </main>
     </div>
