@@ -8,8 +8,8 @@ const Dictionary = () => (
         <Header />
         <main >
             <div>
-                <h2>Fingerspelling Alphabet</h2>
-                <div className='letters'>
+                <h2 className='title'>Fingerspelling Alphabet</h2>
+                <div className='letters_container'>
                     {/* Map through the alphabet and display each letter */}
                     {Array.from(Array(26)).map((_, index) => {
                         const letter = String.fromCharCode(97 + index); // Get letter a-z
@@ -21,7 +21,6 @@ const Dictionary = () => (
                         );
                     })}
                 </div>
-                <input type="text" placeholder="Enter a word" />
             </div>  
         </main>
         <Footer />
