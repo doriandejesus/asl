@@ -15,7 +15,7 @@ const Dictionary = () => (
                         const letter = String.fromCharCode(97 + index); // Get letter a-z
                         return (
                             <div key={letter} className='letter'>
-                                <img src={`/src/components/letters/pngegg (${index + 1}).png`} alt={letter} />
+                                <img src={`./letters/pngegg (${index + 1}).png`} alt={letter} />
                                 <span>{letter.toUpperCase()}</span>
                             </div>
                         );
