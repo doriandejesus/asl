@@ -9,6 +9,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { ImFire } from "react-icons/im";
 import { LuTurtle } from "react-icons/lu";
 import { LuRabbit } from "react-icons/lu";
+import { generate } from "random-words";
 
 const Fingerspelling = () => {
     const [randomWord, setRandomWord] = React.useState(''); 
@@ -52,17 +53,22 @@ const Fingerspelling = () => {
         z: "./letters/pngegg (26).png"
     };
 
-    const getNewWord = async (length) => {
-        try {
-            let url = `https://random-word-api.herokuapp.com/word?number=1&length=${length}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            setRandomWord(data[0]);
-        }
-        catch (error) {
-            console.error('Error fetching random word:', error);
-        }
-        console.log(randomWord);
+    // const getNewWord = async (length) => {
+    //     try {
+    //         let url = `https://random-word-api.vercel.app/api?words=1&length=${length}`;
+    //         const response = await fetch(url);
+    //         const data = await response.json();
+    //         setRandomWord(data[0]);
+    //     }
+    //     catch (error) {
+    //         console.error('Error fetching random word:', error);
+    //     }
+    //     console.log(randomWord);
+    // };
+
+    const getNewWord = (length) => {
+        const word = generate({ exactly: 1, minLength: length, maxLength: length })[0];
+        setRandomWord(word);
     };
 
     const compare = (input, word) => {
