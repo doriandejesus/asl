@@ -53,19 +53,6 @@ const Fingerspelling = () => {
         z: "./letters/pngegg (26).png"
     };
 
-    // const getNewWord = async (length) => {
-    //     try {
-    //         let url = `https://random-word-api.vercel.app/api?words=1&length=${length}`;
-    //         const response = await fetch(url);
-    //         const data = await response.json();
-    //         setRandomWord(data[0]);
-    //     }
-    //     catch (error) {
-    //         console.error('Error fetching random word:', error);
-    //     }
-    //     console.log(randomWord);
-    // };
-
     const getNewWord = (length) => {
         const word = generate({ exactly: 1, minLength: length, maxLength: length })[0];
         setRandomWord(word);
@@ -146,7 +133,7 @@ const Fingerspelling = () => {
             <main>
                 <div className='main-modal'>
                     <div className='main-modal-header'>
-                        <h1>Fingerspelling Practice</h1>
+                        <h1 >{"Fingerspelling Practice".toUpperCase()}</h1>
                         <LocalLibraryOutlinedIcon 
                             className='dictionary-icon'
                             onClick={() => {
