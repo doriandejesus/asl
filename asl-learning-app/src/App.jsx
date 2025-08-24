@@ -9,7 +9,7 @@ function App() {
     <div>
       <main>
         <Routes>
-          <Route path="/" element={<Fingerspelling />} /> {/* for now home is Fingerspelling */}
+          <Route path="/" element={<Home />} />
           <Route path="/fingerspelling" element={<Fingerspelling />} />
           <Route path="/dictionary" element={<Dictionary />} />
         </Routes>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import { RxHamburgerMenu } from "react-icons/rx";
+import { GoHomeFill } from "react-icons/go";
 
 
 const Header = () => {
@@ -23,9 +23,9 @@ const Header = () => {
                 </p>
             </div>
 
-            <RxHamburgerMenu 
-                className='menu-icon' 
-                onClick={() => setMenuOpen(!menuOpen)} 
+            <GoHomeFill
+                className='menu-icon'
+                onClick={() => setMenuOpen(!menuOpen)}
                 size={30}
             />
 
