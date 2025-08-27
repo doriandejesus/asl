@@ -79,6 +79,16 @@
     border-radius: 36px;
     transition: border 0.1s ease-in-out;
     text-transform: uppercase;
+    position: relative;
+}
+
+.practice h1 {
+    font-size: 5.5em !important;
+    text-align: right;
+    margin-right: 1.5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .practice:hover {
@@ -113,7 +123,7 @@
     width: 35%;
     color: var(--text-color);
     background-color: var(--primary-color);
-    font-size: 18px;
+    font-size: 1em !important;
     border-radius: 36px;
     text-transform: uppercase;
 }
@@ -160,4 +170,24 @@
     justify-content: space-between;
     margin: 0.005rem auto;
     width: 75%;
+}
+
+.cherry {
+    background-color: red;
+}
+
+.berry {
+    background-color: #8B008B;
+}
+
+.pumpkin {
+    background-color: #FF7518;
+}
+
+.plum {
+    background-color: #8E4585;
+}
+
+.lime {
+    background-color: #B2D300;
 }
