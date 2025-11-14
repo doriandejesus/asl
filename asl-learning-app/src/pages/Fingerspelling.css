@@ -1,7 +1,7 @@
 .main-modal {
     width: 1000px;
     height: auto;
-    background-color: #e48213;
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -74,7 +74,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: 4px solid rgb(230, 138, 0);
+    border: 4px solid var(--secondary-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     height: 55%;
@@ -101,7 +101,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: 4px solid rgb(230, 138, 0);
+    border: 4px solid var(--secondary-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     color: #ffffff;
@@ -212,7 +212,7 @@
     align-items: center;
     justify-content: center;
     color: white;
-    background-color: rgb(230, 138, 0);
+    background-color: var(--secondary-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

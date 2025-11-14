@@ -14,7 +14,7 @@
     font-size: 1.7rem;
     font-weight: bold;
     color: #000000;
-    background-color: #ffaa41f0; /* optional, for a card-like feel */
+    background-color: var(--secondary-color); /* optional, for a card-like feel */
     padding: 8px;
     border-radius: 8px;
     transition: transform 0.2s;
@@ -29,7 +29,7 @@
   
 .letter:hover {
     transform: scale(1.50); /* subtle hover effect */
-    background-color: #ff9f00; /* darker shade on hover */
+    background-color: var(--primary-color); /* darker shade on hover */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 }
 
