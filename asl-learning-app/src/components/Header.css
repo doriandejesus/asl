@@ -22,7 +22,7 @@
 }
 
 .header {
-    background-color: #13599A;
+    background-color: var(--primary-color);
     width: 94%;
     height: 110px;
     margin: auto;
