@@ -1,0 +1,59 @@
+.letters_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1ch));
+    gap: 20px;
+    max-width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.text-input {
+    width: 300px;
+    padding: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.letterspelled {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #000000;
+    /* background-color: var(--secondary-color); optional, for a card-like feel */
+    padding: 8px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.letterspelled img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.letterspelled:hover {
+    transform: scale(1.10); /* subtle hover effect */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
