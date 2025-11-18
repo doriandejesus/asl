@@ -66,9 +66,28 @@
     text-transform: uppercase;
 }
 
-.credit h1 {
-    font-size: 90px;
+.credit:hover {
+    cursor: pointer;
+    border: 7px solid white;
+    box-sizing: border-box;
+    transition: border 0.1s ease-in-out;
+}
+
+.credit .text {
     transform: rotate(-90deg);
+    white-space: nowrap;
+    margin: auto;
+    position: relative;
+    top: 300px;
+    transform-origin: center;
+}
+
+.credit h1 {
+    font-size: 6.5em !important;
+}
+
+.credit h3 {
+    font-size: 1.5em !important;
 }
 
 .practice {
@@ -105,6 +124,23 @@
     font-size: 18px;
     border-radius: 36px;
     text-transform: uppercase;
+    position: relative;
+}
+
+.alphabet h1 {
+    font-size: 5.0em !important;
+    text-align: left;
+    margin-right: 1.5rem;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+}
+
+.alphabet:hover {
+    cursor: pointer;
+    border: 7px solid white;
+    box-sizing: border-box;
+    transition: border 0.1s ease-in-out;
 }
 
 .last-row {
@@ -132,9 +168,16 @@
     width: 30%;
     color: var(--text-color);
     background-color: var(--primary-color);
-    font-size: 18px;
+    font-size: 1em !important;
     border-radius: 36px;
     text-transform: uppercase;
+}
+
+.spell:hover {
+    cursor: pointer;
+    border: 7px solid white;
+    box-sizing: border-box;
+    transition: border 0.1s ease-in-out;
 }
 
 .color {
@@ -173,11 +216,11 @@
 }
 
 .cherry {
-    background-color: red;
+    background-color: #B30E0E;
 }
 
 .berry {
-    background-color: #8B008B;
+    background-color: #13599A;
 }
 
 .pumpkin {
@@ -189,5 +232,5 @@
 }
 
 .lime {
-    background-color: #B2D300;
+    background-color: #2DA113;
 }

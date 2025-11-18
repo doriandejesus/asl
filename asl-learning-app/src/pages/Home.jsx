@@ -24,16 +24,20 @@ const Home = () => {
                 </div>
 
                 <div className='middle-row'>
-                    <div className='credit'>
-                        <h3>An Application Created By:</h3><br />
-                        <h1>Dorian De Jesus</h1>
+                    <div className='credit'
+                        onClick={() => window.open('https://doriandejesus.github.io', '_blank')}>
+                        <div className="text">
+                            <h3>An Application Created By:</h3>
+                            <h1>Dorian De Jesus</h1>
+                        </div>
                     </div>
                     <div className='practice'
                         onClick={() => window.location.href = '/fingerspelling'}>
                         <h1>Fingerspelling <br />
                         Practice</h1>
                     </div>
-                    <div className='alphabet'>
+                    <div className='alphabet'
+                        onClick={() => window.location.href = '/dictionary'}>
                         <h1>Signed <br />
                         Alphabet</h1>
                     </div>
@@ -41,9 +45,10 @@ const Home = () => {
 
                 <div className='last-row'>
                     <div className='educate'>
-                        <h1>Education <br /> and <br /> Resources</h1>
+                        <h1>Education <br /> and Resources</h1>
                     </div>
-                    <div className='spell'>
+                    <div className='spell'
+                        onClick={() => window.location.href = '/fingerspeller'}>
                         <h1>Finger <br />
                         Speller</h1>
                     </div>
