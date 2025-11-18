@@ -173,6 +173,13 @@
     text-transform: uppercase;
 }
 
+.spell:hover {
+    cursor: pointer;
+    border: 7px solid white;
+    box-sizing: border-box;
+    transition: border 0.1s ease-in-out;
+}
+
 .color {
     width: 35%;
     color: var(--text-color);
